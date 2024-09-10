@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Name, Color, and Number Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 100px;
+    }
+    #name-display, #color-display, #number-display {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container text-center">
+    <h1>Random Generator</h1>
+
+    <!-- Name Display -->
+    <p id="name-display">Click the button to generate a name!</p>
+    <button id="generate-name-btn" class="btn btn-primary">Generate Name</button>
+
+    <!-- Spacer -->
+    <hr>
+
+    <!-- Color Display -->
+    <p id="color-display">Click the button to generate a color!</p>
+    <button id="generate-color-btn" class="btn btn-success">Generate Color</button>
+
+    <!-- Spacer -->
+    <hr>
+
+    <!-- Number Display -->
+    <p id="number-display">Click the button to generate a number!</p>
+    <button id="generate-number-btn" class="btn btn-warning">Generate Number</button>
+  </div>
+
+  <script>
+    // Function to generate random letters
+    function getRandomLetter() {
+      const alphabet = "abcdefghijklmnopqrstuvwxyz";
+      return alphabet[Math.floor(Math.random() * alphabet.length)];
+    }
+
+    // Function to generate a random name
+    function generateRandomName() {
+      const nameLength = Math.floor(Math.random() * 4) + 3; // Generates length 3-6
+      let randomName = "";
+
+      for (let i = 0; i < nameLength; i++) {
+        let randomLetter = getRandomLetter();
+        if (i === 0) {
+          randomLetter = randomLetter.toUpperCase(); // Capitalize the first letter
+        }
+        randomName += randomLetter;
+      }
+
+      return randomName;
+    }
+
+    // Function to generate a random color in hexadecimal format
+    function generateRandomColor() {
+      const randomColor = Math.floor(Math.random() * 16777215).toString(16); // Generates a random color in hex
+      return `#${randomColor.padStart(6, '0')}`; // Pads with zeroes if needed to ensure 6 digits
+    }
+
+    // Function to generate a random number between 1 and 100
+    function generateRandomNumber() {
+      return Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
+    }
+
+    // Event listener for the name button
+    document.getElementById("generate-name-btn").addEventListener("click", function() {
+      const randomName = generateRandomName();
+      document.getElementById("name-display").textContent = randomName;
+    });
+
+    // Event listener for the color button
+    document.getElementById("generate-color-btn").addEventListener("click", function() {
+      const randomColor = generateRandomColor();
+      document.body.style.backgroundColor = randomColor; // Change the background color of the body
+      document.getElementById("color-display").textContent = `Random Color: ${randomColor}`;
+    });
+
+    // Event listener for the number button
+    document.getElementById("generate-number-btn").addEventListener("click", function() {
+      const randomNumber = generateRandomNumber();
+      document.getElementById("number-display").textContent = `Random Number: ${randomNumber}`;
+    });
+  </script>
+</body>
+</html>
